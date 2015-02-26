@@ -370,7 +370,17 @@
           xhr.withCredentials = opts.withCredentials;
         }
 
-        var data = atob(e.target.result.split(',')[1]);
+        //Patch for empty file use case
+        var data = null;
+        try {
+          data = atob(e.target.result.split(',')[1]);
+        } catch(exception) {
+          //If data is empty or undefined in cases such as an empty file
+          if(exception.name = "InvalidCharacterError" && e.target.result.split(',')[1] == null) {
+            data = "";
+          }
+        }
+        //End patch
         if (typeof newName === "string") {
           builder = getBuilder(newName, data, mime, boundary);
         } else {
