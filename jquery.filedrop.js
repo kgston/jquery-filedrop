@@ -374,9 +374,9 @@
         var data = null;
         try {
           data = atob(e.target.result.split(',')[1]);
-        } catch(e) {
+        } catch(exception) {
           //If data is empty or undefined in cases such as an empty file
-          if(e.name = "InvalidCharacterError" && e.target.result.split(',')[1] == null) {
+          if(exception.name = "InvalidCharacterError" && e.target.result.split(',')[1] == null) {
             data = "";
           }
         }
